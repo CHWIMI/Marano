@@ -43,7 +43,7 @@
     const OBSTACLE_MIN_GAP = 120;
     const OBSTACLE_MAX_GAP = 200;
     // 캐릭터 변경 추가 (409점 이상)
-    const EVOLUTION_SCORE = 100; // 캐릭터가 변경될 점수
+    const EVOLUTION_SCORE = 409; // 캐릭터가 변경될 점수
     const DEFAULT_PLAYER_GIF = 'img/egg.gif'; // 기본 캐릭터
     const EVOLVED_PLAYER_GIF = 'game.gif'; // 409점 이후 캐릭터
 
