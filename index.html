@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>모아 티라노 게임</title>
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="모아 티라노 게임">
+    <meta property="og:description" content="야생의 뫄라노가 울부짖엇다 뫄앙">
+    <meta property="og:image" content="main.png">
+
+    <!-- Content-Security-Policy (인라인 스크립트를 허용하도록 'unsafe-inline' 추가) -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://www.gstatic.com https://img.youtube.com https://via.placeholder.com data:; frame-src 'self' https://www.youtube.com https://moabirthday-2b4f2.firebaseapp.com; connect-src https://firestore.googleapis.com https://www.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://firebase.googleapis.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com;">
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Outfit:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <style>
+        /* 단독 페이지에 맞는 배경 및 스크롤 제한 */
+        body {
+            background-color: #FFF5F6;
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 다이얼로그(모달)의 어두운 배경 제거 (body 자체 배경이 있으므로) */
+        .minigame-modal::backdrop {
+            background-color: transparent;
+            backdrop-filter: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 미니게임 다이얼로그 (index.html에서 동일 구조 복사) -->
+    <dialog id="minigame-modal" class="modal minigame-modal">
+        <div class="minigame-wrapper">
+            <div class="minigame-header">
+                <span class="minigame-score-label">SCORE</span>
+                <span id="minigame-score" class="minigame-score">0</span>
+            </div>
+            <div class="minigame-canvas-container">
+                <canvas id="game-canvas"></canvas>
+                <!-- 캐릭터 gif 적용 -->
+                <img id="game-player" src="img/egg.gif" alt="">
+            </div>
+            <div id="game-overlay" class="game-overlay">
+                <div class="game-overlay-content">
+                    <p id="game-overlay-title" class="game-overlay-title">모아를 잡았다!</p>
+                    <p id="game-overlay-subtitle" class="game-overlay-subtitle">스페이스바 또는 터치로 시작</p>
+                </div>
+            </div>
+            <div class="minigame-footer">
+                <div id="minigame-leaderboard" class="minigame-leaderboard">
+                    <h4 class="leaderboard-title">🏆 Top 10</h4>
+                    <ol id="leaderboard-list" class="leaderboard-list">
+                        <li class="leaderboard-empty">기록을 불러오는 중...</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <script src="minigame.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // minigame.js 가 완전히 로드되고 openMiniGame 함수가 준비되었는지 확인 후 게임을 호출
+            const startGameInterval = setInterval(() => {
+                if (window.openMiniGame) {
+                    clearInterval(startGameInterval);
+                    window.openMiniGame();
+                }
+            }, 100);
+        });
+    </script>
+</body>
+
+</html>
