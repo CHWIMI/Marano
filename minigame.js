@@ -35,11 +35,11 @@
     const GROUND_Y = CANVAS_H - 30;
     const PLAYER_W = 40;
     const PLAYER_H = 40;
-    const GRAVITY = 0.6;
-    const JUMP_FORCE = -11;
-    const INITIAL_SPEED = 4;
-    const MAX_SPEED = 18;
-    const SPEED_INCREMENT = 0.003;
+    const GRAVITY = 0.15;
+    const JUMP_FORCE = -5.5;
+    const INITIAL_SPEED = 2;
+    const MAX_SPEED = 9;
+    const SPEED_INCREMENT = 0.00075;
     const OBSTACLE_MIN_GAP = 120;
     const OBSTACLE_MAX_GAP = 200;
     // 캐릭터 변경 추가 (409점 이상)
@@ -64,7 +64,7 @@
     let animFrameId = null;
     let isEvolved = false;
     let lastTime = 0;
-    const TARGET_FPS = 60;
+    const TARGET_FPS = 120;
     const FRAME_INTERVAL = 1000 / TARGET_FPS;
 
     // Player
@@ -283,7 +283,7 @@
         frameCount++;
 
         // Score
-        if (frameCount % 4 === 0) {
+        if (frameCount % 8 === 0) {
             score++;
             updateScoreDisplay();
         }
