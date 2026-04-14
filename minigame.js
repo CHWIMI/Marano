@@ -63,6 +63,9 @@
     let frameCount = 0;
     let animFrameId = null;
     let isEvolved = false;
+    let lastTime = 0;
+    const TARGET_FPS = 60;
+    const FRAME_INTERVAL = 1000 / TARGET_FPS;
 
     // Player
     let player = { x: 60, y: GROUND_Y - PLAYER_H, vy: 0, jumping: false };
@@ -229,6 +232,7 @@
         score = 0;
         speed = INITIAL_SPEED;
         frameCount = 0;
+        lastTime = 0;
         player.x = 60;
         player.y = GROUND_Y - PLAYER_H;
         player.vy = 0;
@@ -434,13 +438,22 @@
         if (scoreDisplay) scoreDisplay.textContent = score;
     }
 
-    // ========== Game Loop ==========
-    function gameLoop() {
+  // ========== Game Loop ==========
+    function gameLoop(timestamp) {
         if (gameState !== 'running') return;
-        update();
-        draw();
+        
         animFrameId = requestAnimationFrame(gameLoop);
+
+        if (!lastTime) lastTime = timestamp;
+        const deltaTime = timestamp - lastTime;
+
+        if (deltaTime >= FRAME_INTERVAL) {
+            lastTime = timestamp - (deltaTime % FRAME_INTERVAL);
+            update();
+            draw();
+        }
     }
+
 
     function startGame() {
         if (gameState === 'running') return;
