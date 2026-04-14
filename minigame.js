@@ -460,7 +460,7 @@
         resetGame();
         gameState = 'running';
         overlay.classList.add('hidden-overlay');
-        gameLoop();
+        requestAnimationFrame(gameLoop);
     }
 
     function gameOver() {
